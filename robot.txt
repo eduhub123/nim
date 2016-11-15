@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /search?q=*
+Disallow: *?replytocom
+Disallow: */attachment/*
+Allow: /wp-admin/admin-ajax.php
+Allow: /wp-admin/images/*
+Sitemap: http://envy.dev/sitemap_index.xml
