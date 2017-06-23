@@ -27,7 +27,7 @@ $this->title = 'Login';
                     <button type="submit" class="btn btn-submit">Login</button>             
                 </li>               
                 <li style="margin-bottom: 0">
-                    <a href="#" title="">Forgot username or password ?</a>
+                    <a href="/forgot-password" title="">Forgot username or password ?</a>
                 </li>
             </ul>
             </form>

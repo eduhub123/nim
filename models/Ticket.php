@@ -3,6 +3,10 @@
 namespace app\models;
 
 use Yii;
+use app\assets\GlobalFunctions;
+use app\assets\GlobalConstants;
+use app\assets\GlobalMessages;
+use app\models\TicketRelationship;
 
 /**
  * This is the model class for table "ticket".
@@ -95,5 +99,75 @@ class Ticket extends \yii\db\ActiveRecord
     public function getTicketRelationships()
     {
         return $this->hasMany(TicketRelationship::className(), ['ticket_id' => 'id']);
+    }
+
+    public function create($author_id, $client_id, $name, $content){
+        $ticket = new Ticket;
+        $ticket->author_id = $author_id;
+        $ticket->client_id = $client_id;
+        $ticket->name = $name;
+        $ticket->create_date = GlobalFunctions::createMysqlTimestamp();
+        if($ticket->save()){
+            $ticketRelationship = new TicketRelationship;
+            $ticketRelationship->user_id = $author_id;
+            $ticketRelationship->ticket_id = $ticket->id;
+            $ticketRelationship->content = $content;
+            $ticketRelationship->create_date = GlobalFunctions::createMysqlTimestamp();
+            if($ticketRelationship->save()){
+                $response['status'] = GlobalConstants::SUCCESS;
+                $response['message'] = GlobalMessages::ADD_TICKET_SUCCESS;
+            }else{
+                $response['status'] = GlobalConstants::ERROR;
+                $response['message'] = GlobalMessages::ADD_TICKETRELATIONSHIP_ERROR;
+            }
+        }else{
+            $response['status'] = GlobalConstants::ERROR;
+            $response['message'] = GlobalMessages::ADD_TICKET_ERROR;
+        }
+        return $response;
+    }
+
+    public function edit($id, $name, $content){
+        $ticket = Ticket::findOne(['id'=>$id]);
+        $ticket->name = $name;        
+        $ticketRelationship = TicketRelationship::findOne(['ticket_id'=>$id]);
+        $ticketRelationship->content = $content;        
+        if($ticket->save() && $ticketRelationship->save())
+        {
+            $response['status'] = GlobalConstants::SUCCESS;
+            $response['message'] = GlobalMessages::UPDATE_TICKET_SUCCESS;
+        }else{
+            $response['status'] = GlobalConstants::ERROR;
+            $response['message'] = GlobalMessages::UPDATE_TICKET_ERROR;
+        }
+        return $response;
+    }
+
+    public function open($id){
+        $ticket = Ticket::findOne(['id'=>$id]);
+        $ticket->status = GlobalConstants::TRUE;
+        if($ticket->save())
+        {
+            $response['status'] = GlobalConstants::SUCCESS;
+            $response['message'] = GlobalMessages::OPEN_TICKET_SUCCESS;
+        }else{
+            $response['status'] = GlobalConstants::ERROR;
+            $response['message'] = GlobalMessages::OPEN_TICKET_ERROR;
+        }
+        return $response;
+    }
+
+    public function close($id){
+        $ticket = Ticket::findOne(['id'=>$id]);
+        $ticket->status = GlobalConstants::FALSE;
+        if($ticket->save())
+        {
+            $response['status'] = GlobalConstants::SUCCESS;
+            $response['message'] = GlobalMessages::CLOSE_TICKET_SUCCESS;
+        }else{
+            $response['status'] = GlobalConstants::ERROR;
+            $response['message'] = GlobalMessages::CLOSE_TICKET_ERROR;
+        }
+        return $response;
     }
 }

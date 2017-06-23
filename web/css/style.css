@@ -240,6 +240,8 @@ textarea.form-control {
       position: absolute;
       left: 0;
       top: 2px; }
+  .ui-checkbox.white label:before {
+    border-color: white; }
   .ui-checkbox input {
     visibility: hidden;
     opacity: 0;
@@ -260,6 +262,8 @@ textarea.form-control {
       left: auto;
       right: 0;
       top: 4px; }
+  .ui-checkbox.clear {
+    margin-right: 0; }
 
 .ui-radio {
   display: inline-block;
@@ -298,6 +302,28 @@ textarea.form-control {
   padding-right: 40px;
   border: 1px solid #dfdfdf;
   border-radius: 2px; }
+  .ui-input-format select {
+    display: block;
+    width: 39px;
+    height: 35px;
+    text-align: center;
+    background: none;
+    padding-left: 13px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+    border-left: 1px solid #dfdfdf;
+    cursor: pointer;
+    outline: none;
+    z-index: 1;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    filter: alpha(opacity=0); }
+    .ui-input-format select::-ms-expand {
+      display: none; }
   .ui-input-format:after {
     content: attr(data-format);
     display: block;
@@ -309,7 +335,7 @@ textarea.form-control {
     font-weight: 300;
     position: absolute;
     top: 1px;
-    right: 1px;
+    right: 0;
     border-left: 1px solid #dfdfdf; }
   .ui-input-format input {
     padding: 0 15px;
@@ -438,7 +464,10 @@ textarea.form-control {
             flex: 1;
             background: #f1f1f1;
             cursor: pointer;
-            position: relative; }
+            position: relative;
+            border-top: 1px solid #d6d6d6; }
+            .ui-calendar .calendar-content > li .ui-ads .ads-list li:first-child {
+              border-top: 0; }
             .ui-calendar .calendar-content > li .ui-ads .ads-list li.red {
               background: rgba(209, 98, 98, 0.2); }
             .ui-calendar .calendar-content > li .ui-ads .ads-list li.blue {
@@ -449,6 +478,8 @@ textarea.form-control {
               background: rgba(157, 139, 104, 0.4); }
             .ui-calendar .calendar-content > li .ui-ads .ads-list li.purple {
               background: rgba(161, 121, 186, 0.4); }
+            .ui-calendar .calendar-content > li .ui-ads .ads-list li:hover {
+              opacity: 0.8; }
         .ui-calendar .calendar-content > li .ui-ads:hover > .event-tooltip {
           display: block; }
       .ui-calendar .calendar-content > li .event-tooltip {
@@ -772,8 +803,8 @@ textarea.form-control {
   #header .logo {
     display: block;
     margin: 10px auto;
-    margin-top: 25px;
-    height: 25px; }
+    margin-top: 23px;
+    height: 36px; }
   #header .logo-function {
     display: block;
     margin: auto;
@@ -850,10 +881,24 @@ textarea.form-control {
       background: url(../images/appname_drop_white.png) no-repeat right center; }
       #header .client-selected .user .avatar:before {
         display: none; }
+      #header .client-selected .user .avatar.none {
+        background: none; }
+      #header .client-selected .user .avatar .img {
+        display: block;
+        float: left;
+        width: 100%;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        overflow: hidden; }
   #header .user {
     display: block;
     float: left;
-    width: 250px;
     position: absolute;
     top: 10px;
     left: 0;
@@ -896,16 +941,21 @@ textarea.form-control {
         -webkit-transition: all 0.2s ease-out 0s; }
       #header .user .avatar:hover:before {
         opacity: 1; }
-      #header .user .avatar img {
+      #header .user .avatar.none {
+        background: none; }
+      #header .user .avatar .img {
         display: block;
-        margin: auto;
+        float: left;
         width: 100%;
+        height: 50px;
         position: absolute;
-        left: 0;
         top: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1; }
+        left: 0;
+        z-index: 1;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        overflow: hidden; }
     #header .user label {
       display: block;
       font-size: 14px;
@@ -1691,6 +1741,7 @@ textarea.form-control {
           text-transform: uppercase;
           padding: 0;
           padding-left: 30px;
+          padding-right: 100px;
           margin: 0;
           margin-top: 40px;
           font-weight: 400;
@@ -1728,18 +1779,81 @@ textarea.form-control {
           background-size: 80px auto;
           cursor: pointer;
           pointer-events: visible; }
+          #content #inner .management-box .ads-tab-child .feature-image.upload {
+            background: #f9f9f9 url(../images/vnloader-sm.GIF) no-repeat center;
+            cursor: default; }
+            #content #inner .management-box .ads-tab-child .feature-image.upload input[type=file] {
+              pointer-events: none;
+              cursor: default; }
           #content #inner .management-box .ads-tab-child .feature-image.active img {
             display: block; }
           #content #inner .management-box .ads-tab-child .feature-image img {
             display: none;
             margin: auto;
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 100%;
+            max-height: 100%;
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0; }
+          #content #inner .management-box .ads-tab-child .feature-image input[type=file] {
+            height: 100% !important;
+            opacity: 0;
+            cursor: pointer; }
+          #content #inner .management-box .ads-tab-child .feature-image input[type=text] {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background: #fff;
+            border: 1px solid #d6d6d6; }
+        #content #inner .management-box .ads-tab-child .ad-child-checkbox {
+          float: left;
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 80px;
+          height: 26px; }
+          #content #inner .management-box .ads-tab-child .ad-child-checkbox:before {
+            content: 'VIDEO';
+            font: 11px/26px Arial, sans-serif;
+            color: #f44336;
+            position: absolute;
+            left: 5px;
+            z-index: 0;
+            font-weight: bold; }
+          #content #inner .management-box .ads-tab-child .ad-child-checkbox:after {
+            content: 'IMG';
+            font: 11px/26px Arial, sans-serif;
+            color: #00bf00;
+            position: absolute;
+            right: 10px;
+            z-index: 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15); }
+          #content #inner .management-box .ads-tab-child .ad-child-checkbox label {
+            display: block;
+            width: 36px;
+            height: 20px;
+            -webkit-border-radius: 50px;
+            -moz-border-radius: 50px;
+            border-radius: 50px;
+            -webkit-transition: all .4s ease;
+            -moz-transition: all .4s ease;
+            -o-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+            transition: all .4s ease;
+            cursor: pointer;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            z-index: 1;
+            background: #cecece; }
+          #content #inner .management-box .ads-tab-child .ad-child-checkbox input {
+            visibility: hidden; }
+          #content #inner .management-box .ads-tab-child .ad-child-checkbox input[type=checkbox]:checked + label {
+            left: 43px; }
     #content #inner .tickets-box {
       display: block;
       float: left;
@@ -2089,6 +2203,27 @@ textarea.form-control {
                 font-size: 20px; }
               #content .content-vault .faq-accordion .panel > .panel-heading .panel-title a.collapsed:before {
                 content: '-'; }
+              #content .content-vault .faq-accordion .panel > .panel-heading .panel-title a .btn-remove {
+                float: right;
+                background: none;
+                border: 0;
+                color: #ca0a0a;
+                font-size: 14px;
+                position: relative;
+                z-index: 1; }
+                #content .content-vault .faq-accordion .panel > .panel-heading .panel-title a .btn-remove:hover {
+                  text-decoration: underline; }
+              #content .content-vault .faq-accordion .panel > .panel-heading .panel-title a .btn-edit {
+                float: right;
+                background: none;
+                border: 0;
+                color: #25aae1;
+                font-size: 14px;
+                margin-right: 10px;
+                position: relative;
+                z-index: 1; }
+                #content .content-vault .faq-accordion .panel > .panel-heading .panel-title a .btn-edit:hover {
+                  text-decoration: underline; }
         #content .content-vault .faq-accordion .panel > .panel-collapse > .panel-body {
           border: 0 !important;
           background: none;
@@ -2145,9 +2280,14 @@ textarea.form-control {
           border-bottom: 1px dotted transparent; }
           #content .business-profile .business-profile-detail > li .input:focus {
             border-bottom-color: #ccc; }
-        #content .business-profile .business-profile-detail > li .list-usp li {
-          display: block;
-          padding: 5px 0; }
+        #content .business-profile .business-profile-detail > li span.day-input {
+          display: inline-block;
+          width: 42px; }
+        #content .business-profile .business-profile-detail > li .list-usp {
+          padding-left: 20px; }
+          #content .business-profile .business-profile-detail > li .list-usp li {
+            display: block;
+            padding: 5px 0; }
         #content .business-profile .business-profile-detail > li table {
           margin-top: 20px; }
           #content .business-profile .business-profile-detail > li table th {
@@ -2384,6 +2524,16 @@ textarea.form-control {
       margin: 0;
       margin-top: 45px;
       font-size: 24px; }
+    #content .advertising #form-update-advertising .alert {
+      opacity: 0;
+      padding: 0 15px;
+      overflow: hidden;
+      height: 0;
+      color: #c34242;
+      margin-bottom: 0;
+      font-size: 14px; }
+      #content .advertising #form-update-advertising .alert.success {
+        color: #43cb83; }
     #content .advertising .advertising-list {
       display: block;
       float: left;
@@ -2499,6 +2649,7 @@ textarea.form-control {
               position: relative;
               position: absolute;
               top: -2px;
+              left: 0.5px;
               margin: 0;
               padding: 0; }
               #content .advertising .advertising-list > li .slider-adplan #run-slider .slider-doc li {
@@ -3166,14 +3317,35 @@ textarea.form-control {
         color: white;
         background: #456878;
         border-radius: 50%;
+        position: relative;
         overflow: hidden; }
-        #content .user-profile .user-avatar .avatar img {
-          width: 200px; }
-      #content .user-profile .user-avatar a {
+        #content .user-profile .user-avatar .avatar.none {
+          background: none; }
+        #content .user-profile .user-avatar .avatar .img {
+          display: block;
+          float: left;
+          width: 100%;
+          height: 200px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          overflow: hidden; }
+      #content .user-profile .user-avatar label {
         display: inline-block;
         color: #5ab0e2;
         border-bottom: 1px solid #5ab0e2;
-        padding-bottom: 1px; }
+        padding-bottom: 1px;
+        cursor: pointer; }
+      #content .user-profile .user-avatar input {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        position: absolute; }
   #content .ads {
     position: relative;
     width: 1300px; }
@@ -3242,6 +3414,21 @@ textarea.form-control {
     border-radius: 2px; }
     #content .btn-submit:hover {
       background: #018ac0; }
+  #content .no-results {
+    display: block;
+    float: left;
+    width: 100%;
+    position: relative;
+    padding: 20px;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 18px;
+    color: #a1a4a4;
+    font-weight: 400;
+    padding-top: 100px;
+    background: url(../images/icon_noproducts.png) no-repeat top center; }
+    #content .no-results strong {
+      font-weight: 600; }
 
 #darkness {
   display: block;
@@ -3315,20 +3502,28 @@ textarea.form-control {
       padding: 30px;
       text-align: center;
       font-size: 22px; }
-    .md-modal#addnew-calendar > .list-form {
+    .md-modal#addnew-calendar .btn-remove-plan {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 24px;
+      color: #e85656;
+      cursor: pointer;
+      pointer-events: visible; }
+    .md-modal#addnew-calendar .list-form {
       display: block;
       float: left;
       width: 100%;
       position: relative;
       margin: 0;
       padding: 0 50px; }
-      .md-modal#addnew-calendar > .list-form > li {
+      .md-modal#addnew-calendar .list-form > li {
         display: block;
         float: left;
         width: 100%;
         position: relative;
         padding: 10px 0; }
-        .md-modal#addnew-calendar > .list-form > li select {
+        .md-modal#addnew-calendar .list-form > li select {
           width: 100%;
           background: url(../images/appname_drop.png) no-repeat calc(100% - 10px) center;
           padding: 10px;
@@ -3340,26 +3535,26 @@ textarea.form-control {
           -moz-appearance: none;
           appearance: none;
           filter: alpha(opacity=0); }
-          .md-modal#addnew-calendar > .list-form > li select::-ms-expand {
+          .md-modal#addnew-calendar .list-form > li select::-ms-expand {
             display: none; }
-        .md-modal#addnew-calendar > .list-form > li.col-2 {
+        .md-modal#addnew-calendar .list-form > li.col-2 {
           width: 50%; }
-          .md-modal#addnew-calendar > .list-form > li.col-2 > span {
+          .md-modal#addnew-calendar .list-form > li.col-2 > span {
             display: inline-block;
             width: 80px; }
-          .md-modal#addnew-calendar > .list-form > li.col-2 > input {
+          .md-modal#addnew-calendar .list-form > li.col-2 > input {
             border: 0;
             width: 120px; }
-        .md-modal#addnew-calendar > .list-form > li .ad-autocomplete {
+        .md-modal#addnew-calendar .list-form > li .ad-autocomplete {
           display: block;
           float: left;
           width: 100%;
           position: relative;
           z-index: 1; }
-          .md-modal#addnew-calendar > .list-form > li .ad-autocomplete.active > ul {
+          .md-modal#addnew-calendar .list-form > li .ad-autocomplete.active > ul {
             visibility: visible;
             opacity: 1; }
-          .md-modal#addnew-calendar > .list-form > li .ad-autocomplete > ul {
+          .md-modal#addnew-calendar .list-form > li .ad-autocomplete > ul {
             display: block;
             float: left;
             width: 100%;
@@ -3374,7 +3569,7 @@ textarea.form-control {
             max-height: 170px;
             visibility: hidden;
             opacity: 0; }
-            .md-modal#addnew-calendar > .list-form > li .ad-autocomplete > ul > li {
+            .md-modal#addnew-calendar .list-form > li .ad-autocomplete > ul > li {
               display: block;
               overflow: hidden;
               text-overflow: ellipsis;
@@ -3383,32 +3578,16 @@ textarea.form-control {
               font-size: 15px;
               cursor: pointer;
               pointer-events: visible; }
-              .md-modal#addnew-calendar > .list-form > li .ad-autocomplete > ul > li.active, .md-modal#addnew-calendar > .list-form > li .ad-autocomplete > ul > li:hover {
+              .md-modal#addnew-calendar .list-form > li .ad-autocomplete > ul > li.active, .md-modal#addnew-calendar .list-form > li .ad-autocomplete > ul > li:hover {
                 background: #f3f7f8; }
-              .md-modal#addnew-calendar > .list-form > li .ad-autocomplete > ul > li .fa {
+              .md-modal#addnew-calendar .list-form > li .ad-autocomplete > ul > li .fa {
                 font-size: 18px;
                 margin-right: 10px; }
-                .md-modal#addnew-calendar > .list-form > li .ad-autocomplete > ul > li .fa.fa-facebook-square, .md-modal#addnew-calendar > .list-form > li .ad-autocomplete > ul > li .fa.fa-instagram {
+                .md-modal#addnew-calendar .list-form > li .ad-autocomplete > ul > li .fa.fa-facebook-square, .md-modal#addnew-calendar .list-form > li .ad-autocomplete > ul > li .fa.fa-instagram {
                   color: #365899; }
-                .md-modal#addnew-calendar > .list-form > li .ad-autocomplete > ul > li .fa.fa-google, .md-modal#addnew-calendar > .list-form > li .ad-autocomplete > ul > li .fa.fa-google-plus {
+                .md-modal#addnew-calendar .list-form > li .ad-autocomplete > ul > li .fa.fa-google, .md-modal#addnew-calendar .list-form > li .ad-autocomplete > ul > li .fa.fa-google-plus {
                   color: #dd4b39; }
-    .md-modal#addnew-calendar .box-btn-add {
-      display: block;
-      float: left;
-      width: 100%;
-      position: relative;
-      background: #f3f7f8;
-      border-top: 1px solid #f1f1f1;
-      border-bottom: 1px solid #f1f1f1;
-      text-align: center;
-      margin: 10px 0;
-      padding: 5px; }
-      .md-modal#addnew-calendar .box-btn-add .btn-add {
-        background: none;
-        color: #456878;
-        font-size: 16px;
-        background: none; }
-    .md-modal#addnew-calendar > .list-add {
+    .md-modal#addnew-calendar .list-add {
       display: block;
       float: left;
       width: 100%;
@@ -3416,27 +3595,39 @@ textarea.form-control {
       margin: 0;
       padding: 10px 0;
       padding-bottom: 30px; }
-      .md-modal#addnew-calendar > .list-add li {
+      .md-modal#addnew-calendar .list-add li {
         display: block;
         text-align: center;
         padding: 5px 20px; }
-        .md-modal#addnew-calendar > .list-add li .fa {
+        .md-modal#addnew-calendar .list-add li .fa {
           font-size: 18px;
           margin-right: 10px; }
-          .md-modal#addnew-calendar > .list-add li .fa.fa-facebook-square, .md-modal#addnew-calendar > .list-add li .fa.fa-instagram {
+          .md-modal#addnew-calendar .list-add li .fa.fa-facebook-square, .md-modal#addnew-calendar .list-add li .fa.fa-instagram {
             color: #365899; }
-          .md-modal#addnew-calendar > .list-add li .fa.fa-google, .md-modal#addnew-calendar > .list-add li .fa.fa-google-plus {
+          .md-modal#addnew-calendar .list-add li .fa.fa-google, .md-modal#addnew-calendar .list-add li .fa.fa-google-plus {
             color: #dd4b39; }
-        .md-modal#addnew-calendar > .list-add li .btn-remove {
+        .md-modal#addnew-calendar .list-add li .btn-remove {
           color: #e74c3c;
           font-size: 20px;
           margin-left: 10px;
           cursor: pointer;
           pointer-events: visible; }
+    .md-modal#addnew-calendar .alert {
+      opacity: 0;
+      padding: 0 15px;
+      overflow: hidden;
+      height: 0;
+      color: #c34242;
+      margin-bottom: 0;
+      font-size: 14px;
+      text-align: center; }
+      .md-modal#addnew-calendar .alert.success {
+        color: #43cb83; }
     .md-modal#addnew-calendar .md-footer {
       background: #456878;
       color: white;
-      padding-top: 0; }
+      padding-top: 0;
+      margin-bottom: -2px; }
       .md-modal#addnew-calendar .md-footer .btn {
         background: none;
         color: white;
@@ -3631,6 +3822,78 @@ textarea.form-control {
         border-color: #398de3;
         transition: all 0.2s ease-out 0s;
         -webkit-transition: all 0.2s ease-out 0s; }
+  .md-modal#modal-image-upload, .md-modal#modal-video-upload, .md-modal#modal-article {
+    width: 600px;
+    left: calc((100vw - 600px)/2);
+    padding: 30px 50px;
+    text-align: center;
+    line-height: 1.8;
+    font-size: 20px; }
+    .md-modal#modal-image-upload .close, .md-modal#modal-video-upload .close, .md-modal#modal-article .close {
+      top: 0;
+      right: 5px;
+      color: #000;
+      line-height: 36px;
+      font-size: 55px;
+      opacity: 0.3; }
+      .md-modal#modal-image-upload .close:hover, .md-modal#modal-video-upload .close:hover, .md-modal#modal-article .close:hover {
+        opacity: 0.7; }
+    .md-modal#modal-image-upload .title, .md-modal#modal-video-upload .title, .md-modal#modal-article .title {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 24px;
+      text-transform: uppercase; }
+    .md-modal#modal-image-upload ul, .md-modal#modal-video-upload ul, .md-modal#modal-article ul {
+      display: block;
+      float: left;
+      width: 100%;
+      position: relative;
+      font-size: 16px;
+      text-align: left;
+      margin: 0;
+      padding: 0; }
+      .md-modal#modal-image-upload ul li, .md-modal#modal-video-upload ul li, .md-modal#modal-article ul li {
+        display: block;
+        float: left;
+        width: 100%;
+        position: relative;
+        position: relative;
+        padding: 5px 0;
+        margin-bottom: 10px; }
+        .md-modal#modal-image-upload ul li strong, .md-modal#modal-video-upload ul li strong, .md-modal#modal-article ul li strong {
+          display: inline-block;
+          max-width: 100%;
+          margin-bottom: 5px;
+          font-weight: 400; }
+        .md-modal#modal-image-upload ul li input[type=file], .md-modal#modal-video-upload ul li input[type=file], .md-modal#modal-article ul li input[type=file] {
+          padding-top: 15px;
+          outline: none; }
+        .md-modal#modal-image-upload ul li .btn, .md-modal#modal-video-upload ul li .btn, .md-modal#modal-article ul li .btn {
+          margin: 15px auto;
+          width: 135px;
+          height: 40px;
+          background: #009cda;
+          background-repeat: no-repeat !important;
+          background-position: center center !important;
+          color: white;
+          text-transform: uppercase;
+          font-size: 17px;
+          border-radius: 2px; }
+          .md-modal#modal-image-upload ul li .btn:hover, .md-modal#modal-video-upload ul li .btn:hover, .md-modal#modal-article ul li .btn:hover {
+            background: #018ac0; }
+    .md-modal#modal-image-upload .alert, .md-modal#modal-video-upload .alert, .md-modal#modal-article .alert {
+      opacity: 0;
+      padding: 0 15px;
+      overflow: hidden;
+      height: 0;
+      color: #c34242;
+      margin-bottom: 0;
+      font-size: 14px; }
+      .md-modal#modal-image-upload .alert.success, .md-modal#modal-video-upload .alert.success, .md-modal#modal-article .alert.success {
+        color: #43cb83; }
+  .md-modal#modal-article {
+    width: 800px;
+    left: calc((100vw - 800px)/2); }
   .md-modal .md-footer {
     display: block;
     float: left;
@@ -3714,5 +3977,482 @@ textarea.form-control {
 
 .pswp__caption__center {
   text-align: center; }
+
+#update-information {
+  background: #456878;
+  color: white; }
+  #update-information .immediate {
+    float: left;
+    position: fixed;
+    top: 24px;
+    right: 38px;
+    text-align: right; }
+    #update-information .immediate a {
+      display: block;
+      color: white;
+      text-align: right;
+      font-size: 18px;
+      font-weight: 400; }
+  #update-information .title {
+    text-align: center;
+    margin: 50px auto; }
+    #update-information .title img {
+      width: 160px; }
+    #update-information .title h1 {
+      font-size: 30px;
+      font-weight: 500;
+      margin-bottom: 0; }
+    #update-information .title .step {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 18px;
+      position: relative;
+      font-size: 20px;
+      font-weight: 400; }
+      #update-information .title .step:before {
+        content: '';
+        display: block;
+        height: 1px;
+        width: 115px;
+        background: white;
+        margin: auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -17px; }
+  #update-information .slider-information {
+    display: block;
+    float: left;
+    width: 100%;
+    position: relative;
+    padding: 0 30px; }
+    #update-information .slider-information .btn-arrow {
+      display: block;
+      width: 30px;
+      height: 60px;
+      margin: auto;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      cursor: pointer;
+      pointer-events: visible; }
+      #update-information .slider-information .btn-arrow.btn-prev {
+        background: url(../images/btn-prev.png) no-repeat center;
+        background-size: 14px auto;
+        left: 20px; }
+      #update-information .slider-information .btn-arrow.btn-next {
+        background: url(../images/btn-next.png) no-repeat center;
+        background-size: 14px auto;
+        right: 20px; }
+    #update-information .slider-information .slider-information-child {
+      display: block;
+      float: left;
+      width: 100%;
+      position: relative; }
+      #update-information .slider-information .slider-information-child label.question {
+        display: block;
+        font-size: 26px;
+        text-align: center; }
+        #update-information .slider-information .slider-information-child label.question .description {
+          display: block;
+          font-size: 16px;
+          font-weight: 300;
+          font-style: italic;
+          padding: 0 10%;
+          margin-top: 10px; }
+      #update-information .slider-information .slider-information-child .intro {
+        display: block;
+        float: left;
+        width: 100%;
+        position: relative;
+        font-size: 22px;
+        text-align: justify; }
+        #update-information .slider-information .slider-information-child .intro p {
+          margin-bottom: 25px; }
+        #update-information .slider-information .slider-information-child .intro .btn {
+          margin-top: 100px;
+          margin-bottom: 30px;
+          width: 213px;
+          height: 48px;
+          background: white;
+          color: #456878;
+          text-transform: uppercase;
+          font-size: 18px;
+          border-radius: 0; }
+      #update-information .slider-information .slider-information-child.step-1, #update-information .slider-information .slider-information-child.step-3, #update-information .slider-information .slider-information-child.step-6, #update-information .slider-information .slider-information-child.step-9, #update-information .slider-information .slider-information-child.step-11, #update-information .slider-information .slider-information-child.step-20 {
+        text-align: center; }
+        #update-information .slider-information .slider-information-child.step-1 input, #update-information .slider-information .slider-information-child.step-3 input, #update-information .slider-information .slider-information-child.step-6 input, #update-information .slider-information .slider-information-child.step-9 input, #update-information .slider-information .slider-information-child.step-11 input, #update-information .slider-information .slider-information-child.step-20 input {
+          background: none;
+          border: 0;
+          margin-top: 20px;
+          text-align: center;
+          width: 100%;
+          color: white;
+          font-size: 50px; }
+          #update-information .slider-information .slider-information-child.step-1 input::-webkit-input-placeholder, #update-information .slider-information .slider-information-child.step-3 input::-webkit-input-placeholder, #update-information .slider-information .slider-information-child.step-6 input::-webkit-input-placeholder, #update-information .slider-information .slider-information-child.step-9 input::-webkit-input-placeholder, #update-information .slider-information .slider-information-child.step-11 input::-webkit-input-placeholder, #update-information .slider-information .slider-information-child.step-20 input::-webkit-input-placeholder {
+            /* Chrome/Opera/Safari */
+            color: white; }
+          #update-information .slider-information .slider-information-child.step-1 input::-moz-placeholder, #update-information .slider-information .slider-information-child.step-3 input::-moz-placeholder, #update-information .slider-information .slider-information-child.step-6 input::-moz-placeholder, #update-information .slider-information .slider-information-child.step-9 input::-moz-placeholder, #update-information .slider-information .slider-information-child.step-11 input::-moz-placeholder, #update-information .slider-information .slider-information-child.step-20 input::-moz-placeholder {
+            /* Firefox 19+ */
+            color: white; }
+          #update-information .slider-information .slider-information-child.step-1 input:-ms-input-placeholder, #update-information .slider-information .slider-information-child.step-3 input:-ms-input-placeholder, #update-information .slider-information .slider-information-child.step-6 input:-ms-input-placeholder, #update-information .slider-information .slider-information-child.step-9 input:-ms-input-placeholder, #update-information .slider-information .slider-information-child.step-11 input:-ms-input-placeholder, #update-information .slider-information .slider-information-child.step-20 input:-ms-input-placeholder {
+            /* IE 10+ */
+            color: white; }
+          #update-information .slider-information .slider-information-child.step-1 input:-moz-placeholder, #update-information .slider-information .slider-information-child.step-3 input:-moz-placeholder, #update-information .slider-information .slider-information-child.step-6 input:-moz-placeholder, #update-information .slider-information .slider-information-child.step-9 input:-moz-placeholder, #update-information .slider-information .slider-information-child.step-11 input:-moz-placeholder, #update-information .slider-information .slider-information-child.step-20 input:-moz-placeholder {
+            /* Firefox 18- */
+            color: white; }
+        #update-information .slider-information .slider-information-child.step-1 textarea, #update-information .slider-information .slider-information-child.step-3 textarea, #update-information .slider-information .slider-information-child.step-6 textarea, #update-information .slider-information .slider-information-child.step-9 textarea, #update-information .slider-information .slider-information-child.step-11 textarea, #update-information .slider-information .slider-information-child.step-20 textarea {
+          width: 100%;
+          height: 150px;
+          margin: 15px auto;
+          padding: 15px 20px;
+          border: 0;
+          color: black; }
+      #update-information .slider-information .slider-information-child.step-2 {
+        text-align: center; }
+        #update-information .slider-information .slider-information-child.step-2 input {
+          border: 0;
+          margin-top: 20px;
+          text-align: center;
+          width: 176px;
+          height: 50px;
+          font-size: 20px;
+          color: black; }
+          #update-information .slider-information .slider-information-child.step-2 input::-webkit-input-placeholder {
+            /* Chrome/Opera/Safari */
+            color: black; }
+          #update-information .slider-information .slider-information-child.step-2 input::-moz-placeholder {
+            /* Firefox 19+ */
+            color: black; }
+          #update-information .slider-information .slider-information-child.step-2 input:-ms-input-placeholder {
+            /* IE 10+ */
+            color: black; }
+          #update-information .slider-information .slider-information-child.step-2 input:-moz-placeholder {
+            /* Firefox 18- */
+            color: black; }
+        #update-information .slider-information .slider-information-child.step-2 select {
+          border: 0;
+          margin-top: 20px;
+          margin-right: 23px;
+          padding-left: 20px;
+          width: 176px;
+          height: 50px;
+          font-size: 20px;
+          font-weight: 300;
+          color: black; }
+      #update-information .slider-information .slider-information-child.step-4 ul {
+        display: block;
+        float: left;
+        width: 100%;
+        position: relative;
+        margin: 50px 0;
+        padding: 0;
+        font-size: 24px; }
+        #update-information .slider-information .slider-information-child.step-4 ul li {
+          display: block;
+          float: left;
+          width: 100%;
+          position: relative;
+          margin-bottom: 20px; }
+          #update-information .slider-information .slider-information-child.step-4 ul li input {
+            color: white;
+            background: none;
+            border: 0;
+            width: 100%;
+            text-align: center; }
+            #update-information .slider-information .slider-information-child.step-4 ul li input::-webkit-input-placeholder {
+              /* Chrome/Opera/Safari */
+              color: white; }
+            #update-information .slider-information .slider-information-child.step-4 ul li input::-moz-placeholder {
+              /* Firefox 19+ */
+              color: white; }
+            #update-information .slider-information .slider-information-child.step-4 ul li input:-ms-input-placeholder {
+              /* IE 10+ */
+              color: white; }
+            #update-information .slider-information .slider-information-child.step-4 ul li input:-moz-placeholder {
+              /* Firefox 18- */
+              color: white; }
+      #update-information .slider-information .slider-information-child.step-5 ul {
+        display: block;
+        float: left;
+        width: 100%;
+        position: relative;
+        margin: 50px 0;
+        margin-bottom: 0;
+        padding: 0;
+        font-size: 24px; }
+        #update-information .slider-information .slider-information-child.step-5 ul li {
+          display: block;
+          float: left;
+          width: 100%;
+          position: relative;
+          margin-bottom: 20px;
+          text-align: center; }
+          #update-information .slider-information .slider-information-child.step-5 ul li strong {
+            display: inline-block;
+            width: 65px;
+            line-height: 48px;
+            font-size: 18px; }
+          #update-information .slider-information .slider-information-child.step-5 ul li input {
+            color: black;
+            width: 176px;
+            height: 48px;
+            border: 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 400;
+            margin: 0 15px; }
+          #update-information .slider-information .slider-information-child.step-5 ul li .fa {
+            font-size: 14px;
+            line-height: 48px; }
+          #update-information .slider-information .slider-information-child.step-5 ul li .ui-checkbox {
+            font-size: 18px; }
+            #update-information .slider-information .slider-information-child.step-5 ul li .ui-checkbox label:before {
+              top: 4px; }
+      #update-information .slider-information .slider-information-child.step-5 .ui-checkbox {
+        font-size: 20px;
+        margin-top: 20px; }
+        #update-information .slider-information .slider-information-child.step-5 .ui-checkbox label:before {
+          top: 7px; }
+      #update-information .slider-information .slider-information-child.step-7 ul {
+        display: table;
+        width: 100%;
+        margin: 50px auto;
+        margin-bottom: 20px;
+        padding: 0;
+        font-size: 24px;
+        max-width: 767px; }
+        #update-information .slider-information .slider-information-child.step-7 ul li {
+          display: block;
+          float: left;
+          width: 100%;
+          position: relative;
+          text-align: center;
+          border-top: 1px solid #c9c9c9; }
+          #update-information .slider-information .slider-information-child.step-7 ul li:first-child {
+            border-top: 0; }
+          #update-information .slider-information .slider-information-child.step-7 ul li input {
+            color: black;
+            width: 100%;
+            height: 48px;
+            border: 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 400; }
+      #update-information .slider-information .slider-information-child.step-7 .btn {
+        width: 175px;
+        height: 40px;
+        border: 0;
+        border-radius: 0;
+        background: white;
+        color: black;
+        font-size: 18px;
+        font-weight: 300; }
+      #update-information .slider-information .slider-information-child.step-8 {
+        text-align: center; }
+        #update-information .slider-information .slider-information-child.step-8 input[type=file] {
+          visibility: hidden;
+          opacity: 0;
+          width: 0;
+          height: 0;
+          overflow: hidden; }
+        #update-information .slider-information .slider-information-child.step-8 label.btn {
+          display: block;
+          margin: 20px auto;
+          width: 180px;
+          height: 48px;
+          padding: 0 10px;
+          line-height: 48px;
+          border-radius: 0;
+          text-transform: uppercase;
+          font-weight: 700;
+          border: 0; }
+        #update-information .slider-information .slider-information-child.step-8 #bi_image_logo {
+          max-width: 200px; }
+        #update-information .slider-information .slider-information-child.step-8 #bi_image_banner {
+          max-width: 900px; }
+      #update-information .slider-information .slider-information-child.step-10 table {
+        width: 100%;
+        max-width: 767px;
+        margin: 50px auto;
+        background: white;
+        color: black;
+        line-height: 48px; }
+        #update-information .slider-information .slider-information-child.step-10 table th {
+          padding: 0 10px;
+          text-align: center; }
+          #update-information .slider-information .slider-information-child.step-10 table th.col-2 {
+            width: 215px;
+            border-left: 1px solid #c5c5c5; }
+        #update-information .slider-information .slider-information-child.step-10 table td {
+          border-top: 1px solid #c5c5c5; }
+          #update-information .slider-information .slider-information-child.step-10 table td.col-2 {
+            border-left: 1px solid #c5c5c5; }
+          #update-information .slider-information .slider-information-child.step-10 table td input {
+            width: 100%;
+            border: 0;
+            padding: 0 15px;
+            text-align: center; }
+      #update-information .slider-information .slider-information-child.step-10 .btn {
+        width: 250px;
+        height: 55px;
+        border: 0;
+        border-radius: 0;
+        background: white;
+        color: black;
+        font-size: 18px;
+        font-weight: 300; }
+      #update-information .slider-information .slider-information-child.step-12 ul, #update-information .slider-information .slider-information-child.step-16 ul {
+        display: table;
+        width: 100%;
+        margin: 50px auto;
+        padding: 0;
+        max-width: 830px; }
+        #update-information .slider-information .slider-information-child.step-12 ul li, #update-information .slider-information .slider-information-child.step-16 ul li {
+          display: block;
+          float: left;
+          width: 50%;
+          font-size: 24px; }
+          #update-information .slider-information .slider-information-child.step-12 ul li:nth-child(2n), #update-information .slider-information .slider-information-child.step-16 ul li:nth-child(2n) {
+            text-align: right; }
+          #update-information .slider-information .slider-information-child.step-12 ul li .ui-input-format, #update-information .slider-information .slider-information-child.step-16 ul li .ui-input-format {
+            background: white;
+            color: black;
+            height: 48px;
+            margin-left: 10px;
+            padding-right: 60px;
+            border-radius: 0; }
+            #update-information .slider-information .slider-information-child.step-12 ul li .ui-input-format:after, #update-information .slider-information .slider-information-child.step-16 ul li .ui-input-format:after {
+              height: 45px;
+              line-height: 45px;
+              width: 60px; }
+            #update-information .slider-information .slider-information-child.step-12 ul li .ui-input-format input, #update-information .slider-information .slider-information-child.step-16 ul li .ui-input-format input {
+              width: 155px;
+              height: 46px;
+              text-align: center; }
+      #update-information .slider-information .slider-information-child.step-13 ul, #update-information .slider-information .slider-information-child.step-15 ul {
+        display: block;
+        float: left;
+        width: 100%;
+        position: relative;
+        margin: 50px auto;
+        padding: 0; }
+        #update-information .slider-information .slider-information-child.step-13 ul li, #update-information .slider-information .slider-information-child.step-15 ul li {
+          display: block;
+          float: left;
+          width: calc((100% / 3) - 10px);
+          margin: 0 5px;
+          background: white;
+          color: black;
+          line-height: 48px; }
+          #update-information .slider-information .slider-information-child.step-13 ul li div.col-1, #update-information .slider-information .slider-information-child.step-15 ul li div.col-1 {
+            float: left;
+            width: calc(100% - 115px);
+            border-top: 1px solid #c5c5c5;
+            text-align: center;
+            position: relative;
+            font-size: 20px; }
+          #update-information .slider-information .slider-information-child.step-13 ul li div.col-2, #update-information .slider-information .slider-information-child.step-15 ul li div.col-2 {
+            float: left;
+            border-top: 1px solid #c5c5c5;
+            text-align: center;
+            position: relative;
+            font-size: 20px;
+            width: 115px;
+            border-left: 1px solid #c5c5c5; }
+            #update-information .slider-information .slider-information-child.step-13 ul li div.col-2 input, #update-information .slider-information .slider-information-child.step-15 ul li div.col-2 input {
+              width: 100%;
+              border: 0;
+              padding: 0 25px;
+              text-align: center; }
+            #update-information .slider-information .slider-information-child.step-13 ul li div.col-2 span, #update-information .slider-information .slider-information-child.step-15 ul li div.col-2 span {
+              position: absolute;
+              right: 20px;
+              top: 0;
+              line-height: 48px; }
+      #update-information .slider-information .slider-information-child.step-14 .ui-checkbox {
+        font-size: 20px; }
+        #update-information .slider-information .slider-information-child.step-14 .ui-checkbox label {
+          padding-left: 45px; }
+          #update-information .slider-information .slider-information-child.step-14 .ui-checkbox label:before {
+            font-size: 30px;
+            width: 24px;
+            height: 24px;
+            line-height: 1;
+            border-radius: 5px; }
+        #update-information .slider-information .slider-information-child.step-14 .ui-checkbox input:checked + label:before {
+          top: 0; }
+      #update-information .slider-information .slider-information-child.step-14 textarea {
+        width: 100%;
+        height: 150px;
+        margin: 15px auto;
+        padding: 15px 20px;
+        border: 0;
+        color: black; }
+      #update-information .slider-information .slider-information-child.step-15 ul li div.col-1 {
+        width: calc(100% - 70px); }
+      #update-information .slider-information .slider-information-child.step-15 ul li div.col-2 {
+        width: 70px; }
+      #update-information .slider-information .slider-information-child.step-15 .ui-checkbox {
+        margin-bottom: 17px;
+        margin-left: 12px; }
+      #update-information .slider-information .slider-information-child.step-17 ul, #update-information .slider-information .slider-information-child.step-18 ul, #update-information .slider-information .slider-information-child.step-19 ul {
+        display: table;
+        width: 100%;
+        margin: 50px auto;
+        padding: 0;
+        text-align: center; }
+        #update-information .slider-information .slider-information-child.step-17 ul li, #update-information .slider-information .slider-information-child.step-18 ul li, #update-information .slider-information .slider-information-child.step-19 ul li {
+          display: inline-block;
+          width: 33%;
+          font-size: 20px;
+          margin-bottom: 50px; }
+          #update-information .slider-information .slider-information-child.step-17 ul li .ui-input-format, #update-information .slider-information .slider-information-child.step-18 ul li .ui-input-format, #update-information .slider-information .slider-information-child.step-19 ul li .ui-input-format {
+            background: white;
+            color: black;
+            height: 48px;
+            margin-left: 10px;
+            padding-right: 60px;
+            border-radius: 0; }
+            #update-information .slider-information .slider-information-child.step-17 ul li .ui-input-format:after, #update-information .slider-information .slider-information-child.step-18 ul li .ui-input-format:after, #update-information .slider-information .slider-information-child.step-19 ul li .ui-input-format:after {
+              height: 45px;
+              line-height: 45px;
+              width: 60px; }
+            #update-information .slider-information .slider-information-child.step-17 ul li .ui-input-format input, #update-information .slider-information .slider-information-child.step-18 ul li .ui-input-format input, #update-information .slider-information .slider-information-child.step-19 ul li .ui-input-format input {
+              width: 90px;
+              height: 46px;
+              text-align: center; }
+          #update-information .slider-information .slider-information-child.step-17 ul li .ui-radio label:before, #update-information .slider-information .slider-information-child.step-18 ul li .ui-radio label:before, #update-information .slider-information .slider-information-child.step-19 ul li .ui-radio label:before {
+            top: 6px; }
+      #update-information .slider-information .slider-information-child.step-22 {
+        text-align: center;
+        font-size: 25px; }
+        #update-information .slider-information .slider-information-child.step-22 h1 {
+          font-size: 33px;
+          margin-bottom: 15px; }
+        #update-information .slider-information .slider-information-child.step-22 p {
+          margin-bottom: 0; }
+        #update-information .slider-information .slider-information-child.step-22 button {
+          margin: 50px auto;
+          font-size: 28px;
+          background: none;
+          border: 0;
+          font-weight: 400; }
+          #update-information .slider-information .slider-information-child.step-22 button:hover {
+            text-decoration: underline; }
+    #update-information .slider-information .bootstrap-datetimepicker-widget {
+      color: #000; }
+      #update-information .slider-information .bootstrap-datetimepicker-widget ul {
+        margin: 0 !important;
+        padding: 0 !important; }
+    #update-information .slider-information .alert {
+      opacity: 0;
+      padding: 0 15px;
+      overflow: hidden;
+      height: 0;
+      color: white;
+      margin-bottom: 0;
+      font-size: 14px;
+      text-align: center; }
 
 /*# sourceMappingURL=style.css.map */

@@ -9,6 +9,7 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use app\assets\GlobalConstants;
 use app\assets\GlobalFunctions;
+use app\assets\GlobalMessages;
 use app\models\UserAssignment;
 
 /**
@@ -341,6 +342,27 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             }
         }
     }
+
+    public function edit($firstname, $lastname, $industry, $phone, $address, $birthday, $is_change, $new_password){
+        $user = Yii::$app->user->identity;
+        $user->firstname = $firstname;
+        $user->lastname = $lastname;
+        $user->industry_id = $industry;
+        $user->phone = $phone;
+        $user->address = $address;
+        $user->birthday = date('Y-m-d', strtotime($birthday));
+        if($is_change == 'on')
+            $user->password = User::setPassword($new_password);
+        if($user->save()){
+            $response['status'] = GlobalConstants::SUCCESS;
+            $response['message'] = GlobalMessages::UPDATE_USER_PROFILE_SUCCESS;
+        }else{
+            $response['status'] = GlobalConstants::ERROR;
+            $response['message'] = GlobalMessages::UPDATE_USER_PROFILE_ERROR;
+        }
+        return $response;
+    }
+
     /*
     * Remove
     */

@@ -13,7 +13,9 @@ class GlobalConstants
     const TRUE = 1;
     const FALSE = 0;
     const NIL = -1;
-    const LIMIT_ROW = 20;
+    const LIMIT_ROW = 10;
+    const SUCCESS = 'success';
+    const ERROR = 'error';
 
     // Gender Constants
     const MALE = 1;
@@ -61,4 +63,21 @@ class GlobalConstants
     const ONLINE = 'Online';
     const OFFLINE = 'Offline';
     const BUSY = 'Busy';
+
+    const IMAGE_TYPE = 'image';
+    const VIDEO_TYPE = 'video';
+    const ARTICLE_TYPE = 'article';
+
+    const NEW_CUSTOMER = 'new-customer';
+    const EXISTING_CUSTOMER = 'existing-customer';
+    const LOST_CUSTOMER = 'lost-customer';
+    const DISCOUNT_PROMOTION = 'discount-promotion';
+    const GIVE_AWAY_PROMOTION = 'give-away-promotion';
+    const INCREASE_SALE_PROMOTION = 'increase-sale-promotion';
+
+    const AD_TYPE_MARKETING_ACTIVITES = 5;
+    const INDICATE_THE_DEMAND = 1;
+    const PROFITABLE_HOLIDAYS = 2;
+    const TARGET_CUSTOMER = 3;
+    const CUSTOMER_RELATIONSHIP = 4;
 }

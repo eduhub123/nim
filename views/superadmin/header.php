@@ -4,39 +4,46 @@ use app\assets\GlobalConstants;
 use app\assets\GlobalMessages;
 use app\models\User;
 use app\models\UserType;
+use app\models\Advertising;
+use app\models\Ticket;
+use app\models\TicketRelationship;
 ?>    
 <?php if(Yii::$app->user->identity->current_client){?>
 <div class="client-selected">
     <div class="user">
-        <?php $user = User::findOne(['id'=> Yii::$app->user->identity->current_client,'active'=>GlobalConstants::TRUE]);?>
-        <div class="avatar">
-            <?php if($user->avatar){?>
-                <img src="<?=Yii::getAlias('@web')?>/images/avatar.png" alt="">
-            <?php }else{
-                echo substr($user->firstname, 0, 1);
-            }?>
+        <?php $client = User::findOne(['id'=> Yii::$app->user->identity->current_client,'active'=>GlobalConstants::TRUE]);?>
+        <div class="avatar <?=($client->avatar)?'none':''?>">
+            <div class="img <?=($client->avatar)?'':'hide'?>" style="background-image: url(<?=$client->avatar?>)"></div>
+            <?=substr($client->firstname, 0, 1)?>
         </div>
-        <label><?=$user->firstname.' '.$user->lastname?></label>
-        <span>ID: <strong><?=GlobalFunctions::getUserID($user->id)?></strong></span>
+        <label><?=$client->firstname.' '.$client->lastname?></label>
+        <span>ID: <strong><?=GlobalFunctions::getUserID($client->id)?></strong></span>
     </div>
     <div class="client-box">
         <input placeholder="Type for search">
         <ul>
-            <li>Khiem Nguyen <span>12345</span></li>
-            <li>Khiem Nguyen <span>12345</span></li>
-            <li>Khiem Nguyen <span>12345</span></li>
-            <li>Khiem Nguyen <span>12345</span></li>
-            <li>Khiem Nguyen <span>12345</span></li>
+            <?php $clients = User::find()->where(['user_type_id'=>GlobalConstants::CLIENT_TYPE_ID, 'active'=>GlobalConstants::TRUE])->limit(5)->all();
+                foreach ($clients as $item) {
+                    if($item->id == $client->id)
+                        echo '<li data-salt="'.$item->salt.'" class="active">'.$item->firstname.' '.$item->lastname.' <span>'.GlobalFunctions::getUserID($item->id).'</span></li>';
+                    else
+                        echo '<li data-salt="'.$item->salt.'">'.$item->firstname.' '.$item->lastname.' <span>'.GlobalFunctions::getUserID($item->id).'</span></li>';
+                }
+            ?>            
         </ul>
     </div>
 </div>
 <div class="budget">
-    <span>Spent: <strong>2000$</strong></span>
+    <?php $advertising = Advertising::findOne(['client_id'=> Yii::$app->user->identity->current_client,'active'=>GlobalConstants::TRUE]);?>
+    <span>Spent: <strong><?=($advertising)?$advertising->spent_amount:0?>$</strong></span>
 </div>
 <?php }?>
 <ul class="header-menu">
     <li>
         <div class="menu-message">
+            <?php
+
+            ?>
             <button class="icon"><span>5</span></button>
             <div class="message-hide">                          
                 <h1>Messages</h1>
@@ -138,7 +145,7 @@ use app\models\UserType;
         </div>
     </li>
     <li>
-        <a href="user-profile.html" class="menu-account">
+        <a href="/superadmin/userprofile" class="menu-account">
             <button class="icon"></button>                      
         </a>
     </li>

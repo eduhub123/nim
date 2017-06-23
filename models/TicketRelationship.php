@@ -3,6 +3,9 @@
 namespace app\models;
 
 use Yii;
+use app\assets\GlobalFunctions;
+use app\assets\GlobalConstants;
+use app\assets\GlobalMessages;
 
 /**
  * This is the model class for table "ticket_relationship".
@@ -72,5 +75,49 @@ class TicketRelationship extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function create($ticket_id, $user_id, $content){
+        $ticketRelationship = new TicketRelationship;
+        $ticketRelationship->user_id = $user_id;
+        $ticketRelationship->ticket_id = $ticket_id;
+        $ticketRelationship->content = $content;
+        $ticketRelationship->create_date = GlobalFunctions::createMysqlTimestamp();
+        if($ticketRelationship->save()){
+            $response['status'] = GlobalConstants::SUCCESS;
+            $response['message'] = GlobalMessages::ADD_TICKETRELATIONSHIP_SUCCESS;
+        }else{
+            $response['status'] = GlobalConstants::ERROR;
+            $response['message'] = GlobalMessages::ADD_TICKETRELATIONSHIP_ERROR;
+        }
+        return $response;
+    }
+
+    public function edit($id, $ticket_id, $user_id, $content){
+        $ticketRelationship = TicketRelationship::findOne(['id'=>$id]);
+        $ticketRelationship->user_id = $user_id;
+        $ticketRelationship->ticket_id = $ticket_id;
+        $ticketRelationship->content = $content;
+        if($ticketRelationship->save()){
+            $response['status'] = GlobalConstants::SUCCESS;
+            $response['message'] = GlobalMessages::UPDATE_TICKETRELATIONSHIP_SUCCESS;
+        }else{
+            $response['status'] = GlobalConstants::ERROR;
+            $response['message'] = GlobalMessages::UPDATE_TICKETRELATIONSHIP_ERROR;
+        }
+        return $response;
+    }
+
+    public function remove($id){
+        $ticketRelationship = TicketRelationship::findOne(['id'=>$id]);
+        $ticketRelationship->active = GlobalConstants::FALSE;
+        if($ticketRelationship->save()){
+            $response['status'] = GlobalConstants::SUCCESS;
+            $response['message'] = GlobalMessages::REMOVE_TICKETRELATIONSHIP_SUCCESS;
+        }else{
+            $response['status'] = GlobalConstants::ERROR;
+            $response['message'] = GlobalMessages::REMOVE_TICKETRELATIONSHIP_ERROR;
+        }
+        return $response;
     }
 }

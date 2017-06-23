@@ -7,6 +7,12 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => '54.164.74.65',
+            'port' => 6379,
+            'database' => 0,
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'northern_interactive_media',
@@ -23,6 +29,8 @@ $config = [
                 'superadmin/customerdetail/<id:\d+>' => 'superadmin/customerdetail',
                 'superadmin/updateservice/<id:\d+>' => 'superadmin/updateservice',
                 'superadmin/updatead/<id:\d+>' => 'superadmin/updatead',
+                'superadmin/ticketdetail/<id:\d+>' => 'superadmin/ticketdetail',
+                'superadmin/promotiondetail/<id:\d+>' => 'superadmin/promotiondetail',                
             ),
         ],
         'user' => [

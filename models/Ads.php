@@ -83,17 +83,17 @@ class Ads extends \yii\db\ActiveRecord
         if($parent_id)
             $ad->parent_id = $parent_id;
         if($ad->save()){
-            $response['status'] = 'success';
+            $response['status'] = GlobalConstants::SUCCESS;
             $response['message'] = GlobalMessages::ADD_ADS_SUCCESS;
             $response['url'] = '/superadmin/adsmanagement';
         }else{
-            $response['status'] = 'error';
+            $response['status'] = GlobalConstants::ERROR;
             $response['message'] = GlobalMessages::ADD_ADS_ERROR;
         }
         return $response;
     }
 
-    public function update($id, $name, $parent_id = null, $color, $icon, $description){
+    public function edit($id, $name, $parent_id = null, $color, $icon, $description){
         $ad = Ads::findOne(['id'=>$id]);
         $ad->name = $name;
         $ad->color = $color;
@@ -102,11 +102,11 @@ class Ads extends \yii\db\ActiveRecord
         if($parent_id)
             $ad->parent_id = $parent_id;
         if($ad->save()){
-            $response['status'] = 'success';
+            $response['status'] = GlobalConstants::SUCCESS;
             $response['message'] = GlobalMessages::UPDATE_ADS_SUCCESS;
             $response['url'] = '/superadmin/adsmanagement';
         }else{
-            $response['status'] = 'error';
+            $response['status'] = GlobalConstants::ERROR;
             $response['message'] = GlobalMessages::UPDATE_ADS_ERROR;
         }
         return $response;
@@ -116,10 +116,10 @@ class Ads extends \yii\db\ActiveRecord
         $ad = Ads::findOne(['id'=>$id]);
         $ad->active = GlobalConstants::FALSE;
         if($ad->save()){
-            $response['status'] = 'success';
+            $response['status'] = GlobalConstants::SUCCESS;
             $response['message'] = GlobalMessages::REMOVE_ADS_SUCCESS;
         }else{
-            $response['status'] = 'error';
+            $response['status'] = GlobalConstants::ERROR;
             $response['message'] = GlobalMessages::REMOVE_ADS_ERROR;
         }            
         return $response;

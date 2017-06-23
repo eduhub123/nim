@@ -39,7 +39,7 @@ $(document).ready(function() {
 		$(this).closest('.hide-tab').find('.hide-content').show();		
 	});
 
-	$('.list-images .video').click(function(event) {
+	$(document).on('click', '.list-images .video', function(event) {
 		$('#video-play').addClass('active');
 		$('#video-play iframe').attr('src', 'https://www.youtube.com/embed/'+$(this).attr('data-id')+'?autoplay=1');
 	});
@@ -63,6 +63,7 @@ $(document).ready(function() {
 
 	if($('#run-slider').length > 0){
 		var skipSlider = document.getElementById('run-slider');	
+		console.log(skipSlider.getAttribute('data-value'));
 		noUiSlider.create(skipSlider, {
 			start: skipSlider.getAttribute('data-value'),		
 			range: {
@@ -73,6 +74,11 @@ $(document).ready(function() {
 				'max': 50
 			},
 			snap: true,
+		});
+		skipSlider.noUiSlider.on('change', function(values, handle){			
+			if ( handle == 0 ) {
+				$('#run-slider').parent().find('input').val(values[handle]);
+			}
 		});
 	}
 
@@ -129,7 +135,7 @@ $(document).ready(function() {
 		$(this).parent().find('.hide').removeClass('hide');
 	});
 
-	$('[name=type-promotion]').click(function(event) {		
+	$('[name=promotion_type]').click(function(event) {		
 		$('.discount-content li').removeClass('active');
 		$('.discount-content li:eq('+$(this).data('index')+')').addClass('active');
 	});
@@ -180,7 +186,7 @@ $(document).ready(function() {
 	initUI();
 	//UI CALENDAR
 	if($('.ui-calendar').length > 0){
-		initUICanlendar($('.ui-calendar').data('date'));
+		initUICanlendar($('.ui-calendar').attr('data-date'));
 	}
 	$('.ui-calendar .arrow.previous').click(function(event) {
 		currentDate.setMonth(currentDate.getMonth()-1);
@@ -224,11 +230,6 @@ initUI = function(){
 		$(this).closest('.ui-select').find('label').text($(this).text()).attr('data-value', $(this).attr('data-value'));
 	});
 
-	$('.ui-calendar .calendar-content li').click(function(event) {
-		if(!$(this).hasClass('disabled'))
-			console.log(1);
-	});
-
 	$('.ui-calendar .calendar-content li .ui-ads').click(function(event) {
 		event.preventDefault();
 	});
@@ -244,15 +245,16 @@ initUICanlendar = function(date){
 	var arrayMonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 	
 	$('.ui-calendar').each(function(indexParent) {
-		var otherDate = new Date(currentDate);
+		var otherDate = new Date(currentDate);		
 		otherDate.setMonth(otherDate.getMonth() + indexParent);		
 		var previousLastDay = new Date(otherDate.getFullYear(), otherDate.getMonth(), 0);
 		var currentFirstDay = new Date(otherDate.getFullYear(), otherDate.getMonth(), 1);
-		var currentLastDay = new Date(otherDate.getFullYear(), otherDate.getMonth()+1, 0);	
+		var currentLastDay = new Date(otherDate.getFullYear(), otherDate.getMonth()+1, 0);			
 
 		var totalChild = $('.ui-calendar .calendar-content > li').length;	
 		$(this).find('.calendar-content > li').removeClass('disabled');	
 		$(this).find('.calendar-bar center strong').text(arrayMonth[otherDate.getMonth()]+' - '+otherDate.getFullYear());
+		$(this).attr('data-date',((otherDate.getMonth()+1) + '/01/' + otherDate.getFullYear()));
 
 		var previousCount = previousLastDay.getDate();
 
@@ -277,24 +279,9 @@ initUICanlendar = function(date){
 			}
 		});
 	});	
-
-	var faceData = [{date: '10-12-2016', ads: '<div class="ui-ads"><ul class="ads-list"><li class="red"></li><li class="blue"></li></ul><div class="event-tooltip"><ul><li class="red"><h3>Brand Awearness Ads</h3><ul><li><i class="fa fa-facebook-square"></i></li><li><i class="fa fa-google"></i>Display</li></ul><a href="#" title="" class="see-detail">See details <i class="fa fa-angle-double-right"></i></a></li><li class="blue"><h3>Promotion Ads</h3><ul><li><i class="fa fa-facebook-square"></i></li><li><i class="fa fa-google"></i>Display</li><li><i class="fa fa-google-plus-square"></i>Adwords</li></ul><a href="#" title="" class="see-detail">See details <i class="fa fa-angle-double-right"></i></a></li></ul></div></div>'},
-					{date: '10-18-2016', ads: '<div class="ui-ads"><ul class="ads-list"><li class="red"></li></ul><div class="event-tooltip"><ul><li class="red"><h3>Brand Awearness Ads</h3><ul><li><i class="fa fa-facebook-square"></i></li><li><i class="fa fa-google"></i>Display</li></ul><a href="#" title="" class="see-detail">See details <i class="fa fa-angle-double-right"></i></a></li></ul></div></div>'},
-					{date: '11-08-2016', ads: '<div class="ui-ads"><ul class="ads-list"><li class="red"></li></ul><div class="event-tooltip"><ul><li class="red"><h3>Brand Awearness Ads</h3><ul><li><i class="fa fa-facebook-square"></i></li><li><i class="fa fa-google"></i>Display</li></ul><a href="#" title="" class="see-detail">See details <i class="fa fa-angle-double-right"></i></a></li></ul></div></div>'}];
-	$('.ui-calendar .calendar-content > li').html('');
-	$('.ui-calendar .calendar-content > li').each(function(index) {
-		var elenment = $(this);
-		$.each(faceData, function(index, item) {
-			if(item.date == elenment.attr('data-date')){
-				elenment.html(item.ads);
-				return;
-			}
-		});
-	});
 }
 
-signupFunctions = function() {
-	
+signupFunctions = function() {	
 	$('#updateprofile-form #password').on('input', function(event) {
 		event.stopPropagation();
 		if($(this).val().length > 0){
@@ -329,6 +316,34 @@ signupFunctions = function() {
 			$('.open-change-password').addClass('hide');
 			$('.open-change-password input').attr('required', false);
 		}
+	});
+
+	$('#upload-user-avatar').change(function(){
+		var formData = new FormData();
+        formData.append('image', $(this)[0].files[0]);
+        var element = $(this);
+        $.ajax({
+			url: "/site/updateavatar",
+            type: "POST",            
+            dataType: "json",
+            data: formData,                             
+            contentType: false,
+            processData: false, 
+		})
+		.done(function(data) {
+			if(data.status == 'error')
+				alert(data.message);
+			else{								
+				element.closest('.user-avatar').find('.avatar').addClass('none');
+				element.closest('.user-avatar').find('.img').removeClass('hide').attr('style', 'background-image: url('+data.message+')');
+			}
+		})
+		.fail(function() {
+			alert('Error - Upload Avatar');
+		})
+		.always(function() {
+			
+		});
 	});
 
 	$('.list-marketing-services h3 input').click(function() {

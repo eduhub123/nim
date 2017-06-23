@@ -11,6 +11,7 @@ use app\models\Currency;
 use app\models\User;
 use app\models\Car;
 use app\models\CarCost;
+use app\assets\DateTime;
 /**************************
     Global Functions
 ***************************/
@@ -147,22 +148,24 @@ class GlobalFunctions
 
                 //if the file has passed the test
                 if($valid_file)
-                {                    
+                {
+                    $file = explode(".",$file_name);
+                    $time = strtotime(date('m/d/Y h:i:sa'));
                     $path = Yii::$app->getBasePath().'/web/uploads/'.$domain_id;
-                    $full_file_name = $path.'/'.$file_name;                    
+                    $full_file_name = $path.'/'.$file[0].'_'.$time.'.'.$file[1];
                     if(!is_dir($path))
                         mkdir($path, 0700);
                     //move it to where we want it to be
                     move_uploaded_file($_FILES[$field_name]['tmp_name'], $full_file_name);
                     chmod($full_file_name, 0777);
-                    $message = 'uploads/'.$domain_id.'/'.$file_name;                    
+                    $message = '/uploads/'.$domain_id.'/'.$file[0].'_'.$time.'.'.$file[1];                 
                 }
             }
             //if there is an error...
             else
             {
                 //set that to be the returned message
-                $message = 'Ooops!  Your upload triggered the following error:  '.$_FILES[$field_name]['error'];
+                $message = GlobalConstants::FALSE;
             }
         }
 
@@ -215,7 +218,35 @@ class GlobalFunctions
         return;
     }
 
+    //render user id has 6 digits
     public function getUserID($user_id){
-        printf('%06d',$user_id);
+        return sprintf('%06d',$user_id);
+    }
+
+    public function convertTime($url){
+        $content = file_get_contents("http://youtube.com/get_video_info?video_id=".$url);
+        parse_str($content, $ytarr);
+        $time = $ytarr['length_seconds'];
+        if ($time > 0){
+            $time_result = '';
+            $hours = intval($time / 3600);
+            if ($hours > 0)
+                $time_result = $time_result.$hours.':';
+            $time = $time % 3600;
+            $minutes = intval($time / 60);
+            $seconds = $time % 60;
+            $time_result = $time_result.(($minutes > 9)?$minutes:'0'.$minutes).':';
+            $time_result = $time_result.(($seconds > 9)?$seconds:'0'.$seconds);
+        }else 
+            $time_result = '0:00';        
+
+        return $time_result;
+    }
+
+    public function getYoutubeDetail($url){
+        $content = file_get_contents("http://youtube.com/get_video_info?video_id=".$url);
+        parse_str($content, $ytarr);
+        //die(print_r($ytarr));
+        return $ytarr;
     }
 }

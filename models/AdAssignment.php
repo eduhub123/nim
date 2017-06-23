@@ -3,7 +3,9 @@
 namespace app\models;
 
 use Yii;
-
+use app\assets\GlobalFunctions;
+use app\assets\GlobalConstants;
+use app\assets\GlobalMessages;
 /**
  * This is the model class for table "ad_assignment".
  *
@@ -77,5 +79,75 @@ class AdAssignment extends \yii\db\ActiveRecord
     public function getClient()
     {
         return $this->hasOne(User::className(), ['id' => 'client_id']);
+    }
+
+    public function video($id, $url){
+        $ad_assignment = AdAssignment::findOne(['id'=>$id, 'client_id'=> Yii::$app->user->identity->current_client, 'active'=>GlobalConstants::TRUE]);
+        if(!$ad_assignment){
+            $response['status'] = GlobalConstants::ERROR;
+            $response['message'] = GlobalMessages::AD_UNASSIGNED;
+            return $response;
+        }
+        $ad_assignment->type = GlobalConstants::VIDEO_TYPE;
+        $ad_assignment->file_url = $url;
+        if($ad_assignment->save()){
+            $response['status'] = GlobalConstants::SUCCESS;
+            $response['message'] = GlobalMessages::UPDATE_VIDEO_AD_SUCCESS;
+            $response['image'] = GlobalFunctions::getYoutubeDetail($url)['title'];
+            $response['time'] = GlobalFunctions::convertTime($url);            
+        }else{
+            $response['status'] = GlobalConstants::ERROR;
+            $response['message'] = GlobalMessages::UPDATE_VIDEO_AD_ERROR;
+        }
+        return $response;
+    }
+
+    public function image($id, $url){
+        $ad_assignment = AdAssignment::findOne(['id'=>$id, 'client_id'=> Yii::$app->user->identity->current_client, 'active'=>GlobalConstants::TRUE]);
+        if(!$ad_assignment){
+            $response['status'] = GlobalConstants::SUCCESS;
+            $response['message'] = GlobalMessages::AD_UNASSIGNED;
+        }
+        if($ad_assignment->file_url && !unlink(Yii::$app->getBasePath().'/web/'.$ad_assignment->file_url))
+        {
+            $response['status'] = GlobalConstants::ERROR;
+            $response['message'] = GlobalMessages::REMOVE_IMAGE_AD_ERROR;
+            return $response;   
+        }else{
+            $file = GlobalFunctions::upload('image', Yii::$app->user->identity->current_client);                        
+            if(!$file){
+                $response['status'] = GlobalConstants::ERROR;
+                $response['message'] = GlobalMessages::UPLOAD_IMAGE_AD_ERROR;
+                return $response;
+            }            
+            $ad_assignment->file_url = $file;                    
+            $ad_assignment->type = GlobalConstants::IMAGE_TYPE;
+            if($ad_assignment->save()){
+                $response['status'] = GlobalConstants::SUCCESS;
+                $response['message'] = GlobalMessages::UPDATE_IMAGE_AD_SUCCESS;
+                $response['image'] = $file;
+            }else{
+                $response['status'] = GlobalConstants::ERROR;
+                $response['message'] = GlobalMessages::UPDATE_IMAGE_AD_ERROR;
+            }
+        }
+        return $response;
+    }
+
+    public function linkAd($id, $link){
+        $ad_assignment = AdAssignment::findOne(['id'=>$id, 'client_id'=> Yii::$app->user->identity->current_client, 'active'=>GlobalConstants::TRUE]);
+        if(!$ad_assignment){
+            $response['status'] = GlobalConstants::SUCCESS;
+            $response['message'] = GlobalMessages::AD_UNASSIGNED;
+        }
+        $ad_assignment->link = $link;
+        if($ad_assignment->save()){
+            $response['status'] = GlobalConstants::SUCCESS;
+            $response['message'] = GlobalMessages::UPDATE_LINK_AD_SUCCESS;
+        }else{
+            $response['status'] = GlobalConstants::ERROR;
+            $response['message'] = GlobalMessages::UPDATE_LINK_AD_ERROR;
+        }
+        return $response;
     }
 }
